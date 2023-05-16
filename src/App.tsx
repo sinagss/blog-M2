@@ -10,15 +10,11 @@ import About from "./pages/About";
 import Users from "./pages/Users";
 import Login from "./pages/Login";
 import AuthProvider from "./context/AuthProvider";
-import { usePersistedState } from "./hooks/usePersistedState";
-import { keys } from "./constants/storageKeys";
 import Container from "@mui/material/Container";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
-  const [isLoggedIn] = usePersistedState(keys.isLoggedIn, false);
-  const [accessLevel] = usePersistedState(keys.accessLevel, 2);
-
-  //todo: states are not getting updated so pathing is not working
   const router = createBrowserRouter([
     {
       path: "",
@@ -35,19 +31,22 @@ function App() {
         { path: "posts", element: <Home /> },
         {
           path: "users",
-          element:
-            isLoggedIn && accessLevel === 0 ? (
+          element: (
+            <PrivateRoute>
               <Users />
-            ) : (
-              <Navigate to="/" replace />
-            ),
+            </PrivateRoute>
+          ),
         },
         { path: "about", element: <About /> },
-        {
-          path: "login",
-          element: isLoggedIn ? <Navigate to="/" replace /> : <Login />,
-        },
       ],
+    },
+    {
+      path: "login",
+      element: (
+        <PublicRoute>
+          <Login />,
+        </PublicRoute>
+      ),
     },
   ]);
 
