@@ -51,7 +51,7 @@ type User = {
   company: Company;
 };
 
-type Posts = {
+type Post = {
   userId: number;
   id: number;
   title: string;
