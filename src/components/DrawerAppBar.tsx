@@ -36,6 +36,10 @@ export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const activeNavStyle =
+    "h-full w-full font-extrabold text-indigo-700 no-underline";
+  const normalNavStyle = "h-full w-full no-underline";
+
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -53,9 +57,7 @@ export default function DrawerAppBar(props: Props) {
               <NavLink
                 to={item.href}
                 className={({ isActive }) =>
-                  isActive
-                    ? "h-full w-full font-extrabold text-indigo-700 no-underline"
-                    : "h-full w-full no-underline"
+                  isActive ? activeNavStyle : normalNavStyle
                 }
               >
                 <ListItemText>{item.text}</ListItemText>
@@ -97,9 +99,7 @@ export default function DrawerAppBar(props: Props) {
                 key={item.text}
                 to={item.href}
                 className={({ isActive }) =>
-                  isActive
-                    ? "h-full w-full font-extrabold text-indigo-700 no-underline"
-                    : "h-full w-full no-underline"
+                  isActive ? activeNavStyle : normalNavStyle
                 }
               >
                 <Button key={item.text} sx={{ color: "#fff" }}>
@@ -117,7 +117,7 @@ export default function DrawerAppBar(props: Props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
