@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
 import CoverImg from "../assets/contemplative-reptile.jpg";
 
 interface Props {
